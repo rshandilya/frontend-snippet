@@ -47,3 +47,59 @@ if (httpRequest.status === 200) {
 httpRequest.responseText // – returns the server response as a string of text
 httpRequest.responseXML 
 
+
+////////      A SIMPLE EXAMPLE   /////////
+
+<button id="ajaxButton" type="button">Make a request</button>
+
+<script>
+(function() {
+  var httpRequest;
+  document.getElementById("ajaxButton").addEventListener('click', makeRequest);
+
+  function makeRequest() {
+    httpRequest = new XMLHttpRequest();
+
+    if (!httpRequest) {
+      alert('Giving up :( Cannot create an XMLHTTP instance');
+      return false;
+    }
+    httpRequest.onreadystatechange = alertContents;
+    httpRequest.open('GET', 'test.html');
+    httpRequest.send();
+  }
+
+  function alertContents() {
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      if (httpRequest.status === 200) {
+        alert(httpRequest.responseText);
+      } else {
+        alert('There was a problem with the request.');
+      }
+    }
+  }
+})();
+</script>
+
+// Alternatively using try catch to tackle communication error - which throw exception in onreadystatechange method
+function alertContents() {
+  try {
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      if (httpRequest.status === 200) {
+        alert(httpRequest.responseText);
+      } else {
+        alert('There was a problem with the request.');
+      }
+    }
+  }
+  catch( e ) {
+    alert('Caught Exception: ' + e.description);
+  }
+}
+
+//////////  WORKING WITH DATA  ///////////
+
+
+
+
+
