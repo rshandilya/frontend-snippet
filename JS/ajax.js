@@ -99,6 +99,34 @@ function alertContents() {
 
 //////////  WORKING WITH DATA  ///////////
 
+// call requesting function
+  document.getElementById("ajaxButton").onclick = function() { 
+      var userName = document.getElementById("ajaxTextbox").value;
+      makeRequest('test.php',userName); 
+  };
+
+// make request
+function makeRequest(url, userName) {
+
+    ...
+
+    httpRequest.onreadystatechange = alertContents;
+    httpRequest.open('POST', url);
+    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    httpRequest.send('userName=' + encodeURIComponent(userName));
+  }
+
+// handle response
+function alertContents() {
+  if (httpRequest.readyState === XMLHttpRequest.DONE) {
+    if (httpRequest.status === 200) {
+      var response = JSON.parse(httpRequest.responseText);
+      alert(response.computedString);
+    } else {
+      alert('There was a problem with the request.');
+    }
+  }
+}
 
 
 
