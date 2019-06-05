@@ -82,3 +82,56 @@
     "header header header" 
     "footer footer footer";
 }
+
+
+/*********** GRIT ITEM **************/
+
+// grid-column-start
+// grid-column-end
+// grid-row-start
+// grid-row-end
+
+.item {
+  grid-column-start: <number> | <name> | span <number> | span <name> | auto;
+  grid-column-end: <number> | <name> | span <number> | span <name> | auto;
+  grid-row-start: <number> | <name> | span <number> | span <name> | auto;
+  grid-row-end: <number> | <name> | span <number> | span <name> | auto;
+}
+// Examples
+.item-a {
+  grid-column-start: 2;
+  grid-column-end: five;
+  grid-row-start: row1-start
+  grid-row-end: 3;
+}
+
+.item-b {
+  grid-column-start: 1;
+  grid-column-end: span col4-start;
+  grid-row-start: 2
+  grid-row-end: span 2
+}
+
+//  grid-column
+//  grid-row
+.item {
+  grid-column: <start-line> / <end-line> | <start-line> / span <value>;
+  grid-row: <start-line> / <end-line> | <start-line> / span <value>;
+}
+//Examples
+.item-c {
+  grid-column: 3 / span 2;
+  grid-row: third-line / 4;
+}
+
+// grid-area
+.item {
+  grid-area: <name> | <row-start> / <column-start> / <row-end> / <column-end>;
+}
+// examples
+.item-d {
+  grid-area: header;
+}
+.item-d {
+  grid-area: 1 / col4-start / last-line / 6;
+}
