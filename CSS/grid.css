@@ -1,0 +1,84 @@
+/******* GRID CONTAINER **************/
+
+.container {
+  display: grid | inline-grid;
+}
+
+// grid-template-columns
+// grid-template-rows
+.container {
+  grid-template-columns: <track-size> ... | <line-name> <track-size> ...;
+  grid-template-rows: <track-size> ... | <line-name> <track-size> ...;
+}
+// Examples
+.container {
+  grid-template-columns: 40px 50px auto 50px 40px;
+  grid-template-rows: 25% 100px auto;
+}
+.container {
+  grid-template-columns: [first] 40px [line2] 50px [line3] auto [col4-start] 50px [five] 40px [end];
+  grid-template-rows: [row1-start] 25% [row1-end] 100px [third-line] auto [last-line];
+}
+.container {
+  grid-template-rows: [row1-start] 25% [row1-end row2-start] 25% [row2-end];
+}
+.container {
+  grid-template-columns: repeat(3, 20px [col-start]);
+}
+// Which is equivalent to this:
+.container {
+  grid-template-columns: 20px [col-start] 20px [col-start] 20px [col-start];
+}
+.container {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.container {
+  grid-template-columns: 1fr 50px 1fr 1fr;
+}
+
+//    grid-template-areas
+.container {
+  grid-template-areas: 
+    "<grid-area-name> | . | none | ..."
+    "...";
+}
+
+.item-a {
+  grid-area: header;
+}
+.item-b {
+  grid-area: main;
+}
+.item-c {
+  grid-area: sidebar;
+}
+.item-d {
+  grid-area: footer;
+}
+///   Examples
+.container {
+  display: grid;
+  grid-template-columns: 50px 50px 50px 50px;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "header header header header"
+    "main main . sidebar"
+    "footer footer footer footer";
+}
+// grid-template
+.container {
+  grid-template: none | <grid-template-rows> / <grid-template-columns>;
+}
+.container {
+  grid-template:
+    [row1-start] "header header header" 25px [row1-end]
+    [row2-start] "footer footer footer" 25px [row2-end]
+    / auto 50px auto;
+}  // eqivalent to
+.container {
+  grid-template-rows: [row1-start] 25px [row1-end row2-start] 25px [row2-end];
+  grid-template-columns: auto 50px auto;
+  grid-template-areas: 
+    "header header header" 
+    "footer footer footer";
+}
