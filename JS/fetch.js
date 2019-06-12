@@ -97,6 +97,9 @@ hrow Error(response.statusText);
 .catch( error => console.log('There was an error!') )
 
 /**** Receiving Information *****/
+const textButton = document.getElementById('number');
+const apiButton = document.getElementById('chuck');
+const outputDiv = document.getElementById('output');
 
 textButton.addEventListener('click', () => {
 fetch(textURL)
@@ -145,12 +148,12 @@ const headers = new Headers({
 'Content-Type': 'application/json'
 });
 const request = new Request(url,
-{ m
-ethod: 'POST',
+{ 
+method: 'POST',
 header: headers,
 body: data
-} ) f
-etch(request)
+} ) 
+fetch(request)
 .then( response => response.json() )
 .then( task => console.log(`Task saved with an id of ${task.id}`) )
 .catch( error => console.log('There was an error:', error))
