@@ -1,4 +1,8 @@
 
+
+
+
+
 /**** Event Listeners *****/
 
 document.body.addEventListener("click", doSomething);
@@ -187,3 +191,87 @@ event.stopPropagation(); }, false);
 
 
 /******* Event Delegation  *******/
+
+
+
+
+/****************************** 
+Creating and triggering Custom events
+*******************************/
+
+var event = new Event('build');
+
+// Listen for the event.
+elem.addEventListener('build', function (e) { /* ... */ }, false);
+
+// Dispatch the event.
+elem.dispatchEvent(event);
+
+/**** Adding custom data – CustomEvent() ******/
+var event = new CustomEvent('build', { detail: elem.dataset.time });
+
+function eventHandler(e) {
+  console.log('The time is: ' + e.detail);
+}
+
+// Event bubbling //
+/*
+<form>
+  <textarea></textarea>
+</form>
+*/
+
+const form = document.querySelector('form');
+const textarea = document.querySelector('textarea');
+
+// Create a new event, allow bubbling, and provide any data you want to pass to the "details" property
+const eventAwesome = new CustomEvent('awesome', {
+  bubbles: true,
+  detail: { text: () => textarea.value }
+});
+
+// The form element listens for the custom "awesome" event and then consoles the output of the passed text() method
+form.addEventListener('awesome', e => console.log(e.detail.text()));
+
+// As the user types, the textarea inside the form dispatches/triggers the event to fire, and uses itself as the starting point
+textarea.addEventListener('input', e => e.target.dispatchEvent(eventAwesome));
+
+
+
+// Creating and dispatching events dynamically //
+/*
+<form>
+  <textarea></textarea>
+</form>
+*/
+
+const form = document.querySelector('form');
+const textarea = document.querySelector('textarea');
+
+form.addEventListener('awesome', e => console.log(e.detail.text()));
+
+textarea.addEventListener('input', function() {
+  // Create and dispatch/trigger an event on the fly
+  // Note: Optionally, we've also leveraged the "function expression" (instead of the "arrow function expression") so "this" will represent the element
+  this.dispatchEvent(new CustomEvent('awesome', { bubbles: true, detail: { text: () => textarea.value } }))
+});
+
+
+//  Triggering built-in events //
+
+function simulateClick() {
+  var event = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  });
+  var cb = document.getElementById('checkbox'); 
+  var cancelled = !cb.dispatchEvent(event);
+  if (cancelled) {
+    // A handler called preventDefault.
+    alert("cancelled");
+  } else {
+    // None of the handlers called preventDefault.
+    alert("not cancelled");
+  }
+}
