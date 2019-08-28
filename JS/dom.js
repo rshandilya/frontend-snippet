@@ -98,7 +98,7 @@ heroes.firstChild // #text " "
 
 heroes.lastChild // #text " "
 
-const wonderWoman = document.querySelector('ul#roster li:last-child)  
+const wonderWoman = document.querySelector('ul#roster li:last-child')  
 wonderWoman.parentNode // <ul id='roster'>…</ul>
 
 wonderWoman.nextSibling // #text " "
